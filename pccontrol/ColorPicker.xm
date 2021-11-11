@@ -15,7 +15,7 @@ using namespace std;
 
 NSDictionary* getRGBFromRawData(UInt8 *eventData, NSError **error)
 {
-    NSArray *data = [[NSString stringWithFormat:@"%s", eventData] componentsSeparatedByString:@";;"];
+    NSArray *data = [[NSString stringWithCString:(char*)eventData encoding:NSUTF8StringEncoding] componentsSeparatedByString:@";;"];
     if ([data count] < 2)
     {
         *error = [NSError errorWithDomain:@"com.zjx.zxtouchsp" code:999 userInfo:@{NSLocalizedDescriptionKey:@"-1;;Unable to pick color. The data format should be \"x;;y\"\r\n"}];
@@ -35,7 +35,7 @@ NSDictionary* getRGBFromRawData(UInt8 *eventData, NSError **error)
 
 NSString* searchRGBFromRawData(UInt8 *eventData, NSError **error)
 {
-    NSArray *data = [[NSString stringWithFormat:@"%s", eventData] componentsSeparatedByString:@";;"];
+    NSArray *data = [[NSString stringWithCString:(char*)eventData encoding:NSUTF8StringEncoding] componentsSeparatedByString:@";;"];
     
     int searchType = [data[0] intValue];
     

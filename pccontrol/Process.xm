@@ -6,7 +6,7 @@ static void* sbServices = dlopen("/System/Library/PrivateFrameworks/SpringBoardS
 
 int switchProcessForegroundFromRawData(UInt8 *eventData)
 {
-    return bringAppForeground([NSString stringWithFormat:@"%s", eventData]);
+    return bringAppForeground([NSString stringWithCString:(char*)eventData encoding:NSUTF8StringEncoding]);
 }
 
 int bringAppForeground(NSString *appIdentifier)

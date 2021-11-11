@@ -41,7 +41,7 @@ int playScript(UInt8* path, NSError **error)
         NSMutableDictionary *individualConfigs = [config valueForKey:@"individual_configs"];
         if (individualConfigs != nil)
         {
-            NSMutableDictionary *scriptPlaybackInfo = [individualConfigs valueForKey:[NSString stringWithFormat:@"%s",path]];
+            NSMutableDictionary *scriptPlaybackInfo = [individualConfigs valueForKey:[NSString stringWithCString:(char*)path encoding:NSUTF8StringEncoding]];
             if (scriptPlaybackInfo != nil)
             {
                 repeatTime = [scriptPlaybackInfo[@"repeat_times"] intValue];
@@ -52,7 +52,7 @@ int playScript(UInt8* path, NSError **error)
     }
     
 
-    [scriptPlayer setPath:[NSString stringWithFormat:@"%s", path]];
+    [scriptPlayer setPath:[NSString stringWithCString:(char*)path encoding:NSUTF8StringEncoding]];
     [scriptPlayer setRepeatTime:repeatTime];
     [scriptPlayer setSpeed:playSpeed];
     [scriptPlayer setInterval:sleepBetweenRun];

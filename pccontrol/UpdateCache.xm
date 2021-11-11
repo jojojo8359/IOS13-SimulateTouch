@@ -10,7 +10,7 @@ extern BOOL openPopUpByDoubleVolumnDown;
 
 void updateCacheFromRawData(UInt8* eventData, NSError **error)
 {
-    NSArray *data = [[NSString stringWithFormat:@"%s", eventData] componentsSeparatedByString:@";;"];
+    NSArray *data = [[NSString stringWithCString:(char*)eventData encoding:NSUTF8StringEncoding] componentsSeparatedByString:@";;"];
 
     int type = [data[0] intValue];
 

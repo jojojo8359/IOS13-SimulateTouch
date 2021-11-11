@@ -105,7 +105,8 @@ void processTask(UInt8 *buff, CFWriteStreamRef writeStreamRef)
     else if (taskType == TASK_RUN_SHELL)
     {
         @autoreleasepool{
-            system([[NSString stringWithFormat:@"sudo zxtouchb -e \"%s\"", eventData] UTF8String]);
+            NSString *eventDataString = [NSString stringWithCString:(char*)eventData encoding:NSUTF8StringEncoding];
+            system([[NSString stringWithFormat:@"sudo zxtouchb -e \"%@\"", eventDataString] UTF8String]);
             notifyClient((UInt8*)"0\r\n", writeStreamRef);
         }
     }

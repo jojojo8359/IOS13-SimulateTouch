@@ -4,7 +4,7 @@
 
 CGRect screenMatchFromRawData(UInt8 *eventData, NSError **error)
 {
-    NSArray *data = [[NSString stringWithFormat:@"%s", eventData] componentsSeparatedByString:@";;"];
+    NSArray *data = [[NSString stringWithCString:(char*)eventData encoding:NSUTF8StringEncoding] componentsSeparatedByString:@";;"];
     NSString *templatePath = data[0];
     int maxTryTimes = 2;
     float acceptableValue = 0.8;

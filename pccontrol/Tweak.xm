@@ -20,6 +20,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <signal.h>
+#include <dlfcn.h>
 
 #include <notify.h>
 #include "headers/CFUserNotification.h"
@@ -285,7 +286,7 @@ Boolean init()
 {
     %orig;
 
-    /*
+    /* 跳过更新检测
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         Boolean isExpired = false;
 
@@ -319,8 +320,6 @@ Boolean init()
             NSLog(@"### com.zjx.springboard: expired");
             showAlertBox(@"Version Outdated", @"ZJXTouchSimulation: This version of ZJXSimulateTouch library is too old and I highly recommend you to update it on Cydia.", 999);
         }
-
-
     });
     */
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

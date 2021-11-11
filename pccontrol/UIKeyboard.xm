@@ -6,7 +6,7 @@
 
 NSString* inputTextFromRawData(UInt8 *eventData, NSError **error)
 {
-    NSArray *data = [[NSString stringWithFormat:@"%s", eventData] componentsSeparatedByString:@";;"];
+    NSArray *data = [[NSString stringWithCString:(char*)eventData encoding:NSUTF8StringEncoding] componentsSeparatedByString:@";;"];
 
     NSString *taskContent = @"";
     if ([data count] < 1)
@@ -42,7 +42,7 @@ NSString* inputTextFromRawData(UInt8 *eventData, NSError **error)
     {
         taskContent = data[1];
     }
-    [[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.zjx.zxtouch.keyboardcontrol" object:NULL userInfo:@{@"task_id": data[0], @"task_content": taskContent} deliverImmediately: true];
+    [[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"com.zjx.zxtouch.keyboardcontrol" object:NULL userInfo:@{@"task_id": data[0], @"task_content": taskContent}];
     return @"Successfully notify the appdelegate tweak. But not sure whether it works...";
 
 }

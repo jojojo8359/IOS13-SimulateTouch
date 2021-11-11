@@ -55,15 +55,15 @@ void report_memory(void) {
 
 void handleTouchIndicatorTaskWithRawData(UInt8* eventData, NSError **error)
 {
-    if ([[NSString stringWithFormat:@"%s", eventData] intValue] == HIDE)
+    if ([[NSString stringWithCString:(char*)eventData encoding:NSUTF8StringEncoding] intValue] == HIDE)
     {
         stopTouchIndicator(error);
     }
-    else if ([[NSString stringWithFormat:@"%s", eventData] intValue] == SHOW)
+    else if ([[NSString stringWithCString:(char*)eventData encoding:NSUTF8StringEncoding]intValue] == SHOW)
     {
         startTouchIndicator(error);
     }
-    else if ([[NSString stringWithFormat:@"%s", eventData] intValue] == RELOAD)
+    else if ([[NSString stringWithCString:(char*)eventData encoding:NSUTF8StringEncoding] intValue] == RELOAD)
     {
         if (!isShowing)
         {

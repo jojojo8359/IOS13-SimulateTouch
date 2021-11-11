@@ -10,7 +10,7 @@ static UIWindow *_window;
 void showToastFromRawData(UInt8 *eventData, NSError **error)
 {
     @autoreleasepool{
-        NSArray *data = [[NSString stringWithFormat:@"%s", eventData] componentsSeparatedByString:@";;"];
+        NSArray *data = [[NSString stringWithCString:(char*)eventData encoding:NSUTF8StringEncoding] componentsSeparatedByString:@";;"];
         if ([data count] < 3)
         {
             *error = [NSError errorWithDomain:@"com.zjx.zxtouchsp" code:999 userInfo:@{NSLocalizedDescriptionKey:@"-1;;The data format should be \"type;;content;;duration(in seconds)[];;position(0: top, 1: bottom, 2: left, 3: right)]\". For example, 0;;success;;1.5;;0.\r\n"}];
